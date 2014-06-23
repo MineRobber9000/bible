@@ -177,6 +177,22 @@
 % a stands for one, b for two, c for three, d for four.
 % aa means one indent, one section. ab means one indent, two sections. Etc.
 % The [b] option for minipage is for alignment. Other options are [t] and [m], but [b] seems to work best.
+\newcommand\pva[]{%
+    \noindent\hspace*{}%
+    \begin{minipage}[b]{\length}
+}
+\newcommand\pvb[]{%
+    \noindent\hspace*{}%
+    \begin{minipage}[b]{\length}
+}
+\newcommand\pvc[]{%
+    \noindent\hspace*{}%
+    \begin{minipage}[b]{\length}
+}
+\newcommand\pvd[]{%
+    \noindent\hspace*{}%
+    \begin{minipage}[b]{\length}
+}
 \newcommand\pvaa[1]{%
     \noindent\hspace*{1em}%
     \begin{minipage}[b]{\lengtha}%
