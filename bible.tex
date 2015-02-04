@@ -126,7 +126,7 @@
 \newcommand\latina{{\abbrev 𝔏}}
 \newcommand\masoretic{{\abbrev 𝔐}}
 \newcommand\missing{{\scriptsize>}}
-\newcommand\peshitta{{\abbrev 𝔖}} % Source Code Pro messes up the appearance here, but it's correct.
+\newcommand\peshitta{{\abbrev 𝔖}} % Source Code Pro messes up the appearance, but it's correct.
 \newcommand\qumran{{\abbrev 𝔔}}
 \newcommand\sampen{{\abbrev\large ⅏}}
 \newcommand\septuagint{{\abbrev 𝔊}\thinspace}
@@ -147,16 +147,15 @@
 % hang and flushmargin: Removes the indentation.
 
 % Makes footnotes lowercase, italic alpha instead of Arabic numerals.
+% This is currently not working because there are some places where there are more than 26 footnotes on a page.
 % \renewcommand{\thefootnote}{\textit\alph{footnote}}
+% Also, try having the value be "\value{versecounter}\alph{footnote}" or something.
 
 % Force footnotes to stay on the same page and not bleed over. Long footnotes should be placed in the appendix.
 % xxxx: this isn't perfect in preventing footnotes from appearing on the next page.
 \interfootnotelinepenalty=10000
 
-% Remove line above footnotes.
-% \renewcommand{\footnoterule}{\hrule height 0pt}
-
-% To indicate when a word used in English rendering is understood from the Hebrew, but not explicitly stated. The KJV simply italicizes all such instances, but this is cleaner and more in keeping with the BHS.
+% To indicate when a word used in English rendering is understood from the Hebrew, but not explicitly stated. The KJV simply italicizes all such instances, but this is cleaner and more in keeping with the style of the BHS.
 \usepackage{morefloats} % Allows more floats to be placed on a page. The \understood command generates a hefty amount of floats and this helps alleviate some problems with using this command so often. Note that this is not a panacea.
 \usepackage[mathscr]{euscript} % Allows for \mathscr command.
 \newcommand\understood{\textdegree\marginpar{{\tiny\hfil$\mathscr{U}$\hfil}}}
@@ -174,27 +173,23 @@
 \newcommand\ylt[1]{\footnote{\textsc{ylt} #1}}
 
 % Abbreviated footnote commands for \footnotetext command
-\newcommand\fntalt[1]{\footnotetext{\textsc{alt} #1}}
-\newcommand\fntca[2]{\footnotetext{\textsc{ca} #1 (#2)}}
-\newcommand\fntcf[1]{\footnote{cf.\ #1}}
-\newcommand\fnted[1]{\footnotetext{\textsc{ed} #1}}
-\newcommand\fntheb[2]{\footnotetext{\textsc{heb} \Hebrew{#1} #2}}
-\newcommand\fnthalot[1]{\footnotetext{\textsc{halot} #1}}
-\newcommand\fnthalotu[1]{\footnotetext{\textsc{halotu} #1}}
-\newcommand\fntie[1]{\footnotetext{\textsc{ie} #1}}
-\newcommand\fntlit[1]{\footnotetext{\textsc{lit} #1}}
-\newcommand\fntylt[1]{\footnotetext{\textsc{ylt} #1}}
+\newcommand\fntalt[1]{\footnotetext[\value{mpfootnote}]{\textsc{alt} #1}\addtocounter{mpfootnote}{1}}
+\newcommand\fntca[2]{\footnotetext[\value{mpfootnote}]{\textsc{ca} #1 (#2)}\addtocounter{mpfootnote}{1}}
+\newcommand\fntcf[1]{\footnotetext[\value{mpfootnote}]{cf.\ #1}\addtocounter{mpfootnote}{1}}
+\newcommand\fnted[1]{\footnotetext[\value{mpfootnote}]{\textsc{ed} #1}\addtocounter{mpfootnote}{1}}
+\newcommand\fntheb[2]{\footnotetext[\value{mpfootnote}]{\textsc{heb} \Hebrew{#1} #2}\addtocounter{mpfootnote}{1}}
+\newcommand\fnthalot[1]{\footnotetext[\value{mpfootnote}]{\textsc{halot} #1}\addtocounter{mpfootnote}{1}}
+\newcommand\fnthalotu[1]{\footnotetext[\value{mpfootnote}]{\textsc{halotu} #1}\addtocounter{mpfootnote}{1}}
+\newcommand\fntie[1]{\footnotetext[\value{mpfootnote}]{\textsc{ie} #1}\addtocounter{mpfootnote}{1}}
+\newcommand\fntlit[1]{\footnotetext[\value{mpfootnote}]{\textsc{lit} #1}\addtocounter{mpfootnote}{1}}
+\newcommand\fntylt[1]{\footnotetext[\value{mpfootnote}]{\textsc{ylt} #1}\addtocounter{mpfootnote}{1}}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%
 %     HEADER and FOOTER
 % %%%%%%%%%%%%%%%%%%%%%%%%%
 % Header options for dictionary style headers.
 \usepackage{fancyhdr}
-
-\renewcommand{\headrulewidth}{0pt} % Removes horizontal line.
-
-\usepackage{fix2col} % Fixes potential problems with marks on two column pages.
-\usepackage{substr}
+\renewcommand{\headrulewidth}{0pt} % Removes horizontal line from header.
 
 % Extracts book name and chapters from rightmark and leftmark.
 \fancyhead[LE]{\rightmark}
@@ -207,8 +202,8 @@
 % %%%%%%%%%%%%%%
 %     POETRY
 % %%%%%%%%%%%%%%
-% vn stands for verse number.
-\newcommand\vn[1]{%
+\usepackage{substr}
+\newcommand\vn[1]{% vn stands for verse number.
     \markboth{#1}{#1}% For header marking.
     \thinspace\color{Red}{$^{\BehindSubString{:}{#1}}$\thinspace}% Print verse number.
     \addtocounter{enumi}{1}% Add to enumi counter. This way, when we switch back to normal verses (in chapters including both prose and poetry) the numbering will be correct.
@@ -224,16 +219,19 @@
 \setlength{\lengthc}{0.89\textwidth}
 \newlength{\lengthd}
 \setlength{\lengthd}{0.855\textwidth}
+\newlength{\lengthe}
+\setlength{\lengthe}{0.825\textwidth}
 
-% pv stands for poetry verse.
-% a stands for one, b for two, c for three, d for four.
+% pv stands for Poetry Verse.
+% a stands for one, b two, c three, etc.
 % aa means one indent, one section. ab means one indent, two sections. Etc.
 % The [b] option for minipage is for alignment. Other options are [t] and [m], but [b] seems to work best.
+\let\thempfootnote\thefootnote % Makes mpfootnote the same character scheme as regular footnotes.
+
 \newcommand\pvaa[1]{%
     \noindent\hspace*{1em}%
     \begin{minipage}[b]{\lengtha}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -243,7 +241,6 @@
     \noindent\hspace*{1em}%
     \begin{minipage}[b]{\lengtha}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -253,7 +250,6 @@
     \noindent\hspace*{1em}%
     \begin{minipage}[b]{\lengtha}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -263,7 +259,6 @@
     \noindent\hspace*{1em}%
     \begin{minipage}[b]{\lengtha}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\hspace*{1.5em}#4\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -273,7 +268,6 @@
     \noindent\hspace*{2em}%
     \begin{minipage}[b]{\lengthb}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -283,7 +277,6 @@
     \noindent\hspace*{2em}%
     \begin{minipage}[b]{\lengthb}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -293,7 +286,6 @@
     \noindent\hspace*{2em}%
     \begin{minipage}[b]{\lengthb}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -303,7 +295,6 @@
     \noindent\hspace*{2em}%
     \begin{minipage}[b]{\lengthb}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\hspace*{1.5em}#4\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -313,7 +304,6 @@
     \noindent\hspace*{3em}%
     \begin{minipage}[b]{\lengthc}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -323,7 +313,6 @@
     \noindent\hspace*{3em}%
     \begin{minipage}[b]{\lengthc}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -333,7 +322,6 @@
     \noindent\hspace*{3em}%
     \begin{minipage}[b]{\lengthc}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -343,7 +331,6 @@
     \noindent\hspace*{3em}%
     \begin{minipage}[b]{\lengthc}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\hspace*{1.5em}#4\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -353,7 +340,6 @@
     \noindent\hspace*{4em}%
     \begin{minipage}[b]{\lengthd}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -363,7 +349,6 @@
     \noindent\hspace*{4em}%
     \begin{minipage}[b]{\lengthd}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -373,7 +358,6 @@
     \noindent\hspace*{4em}%
     \begin{minipage}[b]{\lengthd}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -383,7 +367,6 @@
     \noindent\hspace*{4em}%
     \begin{minipage}[b]{\lengthd}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\hspace*{1.5em}#4\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -391,9 +374,8 @@
 
 \newcommand\pvea[1]{%
     \noindent\hspace*{5em}%
-    \begin{minipage}[b]{\lengthd}%
+    \begin{minipage}[b]{\lengthe}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -401,9 +383,8 @@
 
 \newcommand\pveb[2]{%
     \noindent\hspace*{5em}%
-    \begin{minipage}[b]{\lengthd}%
+    \begin{minipage}[b]{\lengthe}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -411,9 +392,8 @@
 
 \newcommand\pvec[3]{%
     \noindent\hspace*{5em}%
-    \begin{minipage}[b]{\lengthd}%
+    \begin{minipage}[b]{\lengthe}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
@@ -421,9 +401,8 @@
 
 \newcommand\pved[4]{%
     \noindent\hspace*{5em}%
-    \begin{minipage}[b]{\lengthd}%
+    \begin{minipage}[b]{\lengthe}%
         \setcounter{mpfootnote}{\value{footnote}}
-        \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\hspace*{1.5em}#4\smallskip%
         \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%

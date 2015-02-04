@@ -1,12 +1,12 @@
 \documentclass{article}
-\usepackage{footmisc}% for \footref and \mpfootnotemark
+\usepackage[multiple]{footmisc}% for \footref and \mpfootnotemark
 \begin{document}
 \noindent\ldots{} main text\footnote{Before minipage} \ldots\par
 \fbox{\begin{minipage}{.5\linewidth}
     Footnotes in minipages are numbered using
-    lowercase letters\footnote{Inside minipage\label{fn:1}}.\\
-    To reuse the previous minipage footnote\footref{fn:1}.\\
-    A second minipage footnote\footnote{Again}.\\
+    lowercase letters.\\
+    To reuse the previous minipage footnote.\\
+    A second minipage footnote.\\
     A footnote to use global\footnotemark.\\
     A second global footnote\footnotemark.\footnotemark\footnotemark
 \end{minipage}}
@@ -22,4 +22,23 @@
 %--------------------------------------------------------
 \par
 \noindent\ldots{} main text\footnote{After minipage} \ldots\par
+\fbox{\begin{minipage}{.5\linewidth}
+    Footnotes in minipages are numbered using
+    lowercase letters.\\
+    To reuse the previous minipage footnote.\\
+    A second minipage footnote.\\
+    A footnote to use global\footnotemark.\\
+    A second global footnote\footnotemark.\footnotemark\footnotemark
+\end{minipage}}
+%--- Directly after minipage ----------------------------
+\addtocounter{footnote}{-3}%
+\footnotetext{First global footnote inside minipage}%
+\stepcounter{footnote}%
+\footnotetext{Second global footnote inside minipage}%
+\stepcounter{footnote}%
+\footnotetext{another}
+\stepcounter{footnote}%
+\footnotetext{y}
+%--------------------------------------------------------
+and more here\footnote{here}
 \end{document}
