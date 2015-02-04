@@ -172,17 +172,19 @@
 \newcommand\lit[1]{\footnote{\textsc{lit} #1}}
 \newcommand\ylt[1]{\footnote{\textsc{ylt} #1}}
 
+\renewcommand\footnotemark{\addtocounter{footnote}{-1}}
+
 % Abbreviated footnote commands for \footnotetext command
-\newcommand\fntalt[1]{\footnotetext[\value{mpfootnote}]{\textsc{alt} #1}\addtocounter{mpfootnote}{1}}
-\newcommand\fntca[2]{\footnotetext[\value{mpfootnote}]{\textsc{ca} #1 (#2)}\addtocounter{mpfootnote}{1}}
-\newcommand\fntcf[1]{\footnotetext[\value{mpfootnote}]{cf.\ #1}\addtocounter{mpfootnote}{1}}
-\newcommand\fnted[1]{\footnotetext[\value{mpfootnote}]{\textsc{ed} #1}\addtocounter{mpfootnote}{1}}
-\newcommand\fntheb[2]{\footnotetext[\value{mpfootnote}]{\textsc{heb} \Hebrew{#1} #2}\addtocounter{mpfootnote}{1}}
-\newcommand\fnthalot[1]{\footnotetext[\value{mpfootnote}]{\textsc{halot} #1}\addtocounter{mpfootnote}{1}}
-\newcommand\fnthalotu[1]{\footnotetext[\value{mpfootnote}]{\textsc{halotu} #1}\addtocounter{mpfootnote}{1}}
-\newcommand\fntie[1]{\footnotetext[\value{mpfootnote}]{\textsc{ie} #1}\addtocounter{mpfootnote}{1}}
-\newcommand\fntlit[1]{\footnotetext[\value{mpfootnote}]{\textsc{lit} #1}\addtocounter{mpfootnote}{1}}
-\newcommand\fntylt[1]{\footnotetext[\value{mpfootnote}]{\textsc{ylt} #1}\addtocounter{mpfootnote}{1}}
+\newcommand\fntalt[1]{\footnotetext{\textsc{alt} #1}\stepcounter{footnote}}
+\newcommand\fntca[2]{\footnotetext{\textsc{ca} #1 (#2)}\stepcounter{footnote}}
+\newcommand\fntcf[1]{\footnotetext{cf.\ #1}\stepcounter{footnote}}
+\newcommand\fnted[1]{\footnotetext{\textsc{ed} #1}\stepcounter{footnote}}
+\newcommand\fntheb[2]{\footnotetext{\textsc{heb} \Hebrew{#1} #2}\stepcounter{footnote}}
+\newcommand\fnthalot[1]{\footnotetext{\textsc{halot} #1}\stepcounter{footnote}}
+\newcommand\fnthalotu[1]{\footnotetext{\textsc{halotu} #1}\stepcounter{footnote}}
+\newcommand\fntie[1]{\footnotetext{\textsc{ie} #1}\stepcounter{footnote}}
+\newcommand\fntlit[1]{\footnotetext{\textsc{lit} #1}\stepcounter{footnote}}
+\newcommand\fntylt[1]{\footnotetext{\textsc{ylt} #1}\stepcounter{footnote}}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%
 %     HEADER and FOOTER
@@ -231,180 +233,180 @@
 \newcommand\pvaa[1]{%
     \noindent\hspace*{1em}%
     \begin{minipage}[b]{\lengtha}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvab[2]{%
     \noindent\hspace*{1em}%
     \begin{minipage}[b]{\lengtha}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvac[3]{%
     \noindent\hspace*{1em}%
     \begin{minipage}[b]{\lengtha}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvad[4]{%
     \noindent\hspace*{1em}%
     \begin{minipage}[b]{\lengtha}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\hspace*{1.5em}#4\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvba[1]{%
     \noindent\hspace*{2em}%
     \begin{minipage}[b]{\lengthb}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvbb[2]{%
     \noindent\hspace*{2em}%
     \begin{minipage}[b]{\lengthb}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvbc[3]{%
     \noindent\hspace*{2em}%
     \begin{minipage}[b]{\lengthb}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvbd[4]{%
     \noindent\hspace*{2em}%
     \begin{minipage}[b]{\lengthb}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\hspace*{1.5em}#4\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvca[1]{%
     \noindent\hspace*{3em}%
     \begin{minipage}[b]{\lengthc}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvcb[2]{%
     \noindent\hspace*{3em}%
     \begin{minipage}[b]{\lengthc}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvcc[3]{%
     \noindent\hspace*{3em}%
     \begin{minipage}[b]{\lengthc}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvcd[4]{%
     \noindent\hspace*{3em}%
     \begin{minipage}[b]{\lengthc}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\hspace*{1.5em}#4\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvda[1]{%
     \noindent\hspace*{4em}%
     \begin{minipage}[b]{\lengthd}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvdb[2]{%
     \noindent\hspace*{4em}%
     \begin{minipage}[b]{\lengthd}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvdc[3]{%
     \noindent\hspace*{4em}%
     \begin{minipage}[b]{\lengthd}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvdd[4]{%
     \noindent\hspace*{4em}%
     \begin{minipage}[b]{\lengthd}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\hspace*{1.5em}#4\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvea[1]{%
     \noindent\hspace*{5em}%
     \begin{minipage}[b]{\lengthe}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pveb[2]{%
     \noindent\hspace*{5em}%
     \begin{minipage}[b]{\lengthe}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pvec[3]{%
     \noindent\hspace*{5em}%
     \begin{minipage}[b]{\lengthe}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
 \newcommand\pved[4]{%
     \noindent\hspace*{5em}%
     \begin{minipage}[b]{\lengthe}%
-        \setcounter{mpfootnote}{\value{footnote}}
+        % \setcounter{mpfootnote}{\value{footnote}}
         #1\hspace*{1.5em}#2\hspace*{1.5em}#3\hspace*{1.5em}#4\smallskip%
-        \setcounter{footnote}{\value{mpfootnote}}
+        % \setcounter{footnote}{\value{mpfootnote}}
     \end{minipage}%
 }
 
